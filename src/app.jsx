@@ -1,5 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import withLoading from './components/loading/with-loading';
 
-const App = () => <h1>UK Energy Mix</h1>;
+const Page = () => {
+    return <h1>UK Energy Mix</h1>;
+}
+
+const WrappedPage = withLoading(Page);
+
+const App = () => {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState();
+    useEffect( () => {
+        const fetchGenData = async () => {
+            const response = await fetch('https://api.carbonintensity.org.uk/generation');
+            if (response.status === 200) {
+                const data = await response.json();
+                setData(data);
+                setLoading(false);
+            } else {
+                // TODO error handling
+            }
+        }
+        fetchGenData();
+    })
+    return <WrappedPage loading={loading} data={data} />
+};
 
 export default App;
