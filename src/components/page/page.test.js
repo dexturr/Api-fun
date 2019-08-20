@@ -8,6 +8,7 @@ import Card from '../card/card';
 const hasText = (component, selector, text) => expect(component.find(selector).at(0).text()).to.equal(text);
 const exists = (component, selector, { count }) => expect(component.find(selector).at(0)).to.have.lengthOf(count);
 
+// Integration and unit tests are mixed here and should be seperated
 
 describe('Page', () => {
     it('should render 2 cards', () => {
@@ -28,7 +29,7 @@ describe('Page', () => {
             ]
         }
         const comp = shallow(<Page data={data}/>);
-        expect(comp.find(Card)).to.have.lengthOf(2);
+        expect(comp, Card, { count: 2})
     });
     it('should renders card values & classes for the highest and lowest values', () => {
         const data = {
@@ -61,5 +62,25 @@ describe('Page', () => {
         hasText(lowestCard, '.card-title', 'Coffee');
         hasText(lowestCard, '.card-text', '0%');
         exists(lowestCard, '.bg-danger', { count : 1 });
+    });
+    it('should render data graph', () => {
+        const data = {
+            generationmix: [
+                {
+                    fuel: 'Tea',
+                    perc: 95,
+                },
+                {
+                    fuel: 'Coke Zero',
+                    perc: 5,
+                },
+                {
+                    fuel: 'Coffee',
+                    perc: 0,
+                },
+            ]
+        }
+        const comp = mount(<Page data={data}/>);
+        exists(comp, 'svg', { count: 1 });
     });
 })

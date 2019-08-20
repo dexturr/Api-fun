@@ -4,7 +4,6 @@ import Page from './components/page/page';
 
 const WrappedPage = withLoading(Page);
 
-// TODO need to test but need a fetch mock.
 const App = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState();

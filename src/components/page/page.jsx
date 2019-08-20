@@ -6,12 +6,12 @@ import _ from 'lodash';
 
 
 const Page = ({ data }) => {
-    const sortedData = _.orderBy(data.generationmix, 'perc');
-    const lowest = _.first(sortedData);
-    const highest = _.last(sortedData);
+    const sortedData = _.orderBy(data.generationmix, 'perc', ['desc']);
+    const highest = _.first(sortedData);
+    const lowest = _.last(sortedData);
 
     return (<Container>
-        <h1>Energy Generation Data</h1>
+        <h1>Fuel Split Highlights</h1>
         <Row>
             <Col xs={6}>
                 <Card header='Highest' type='success' energyType={highest.fuel} value={`${highest.perc}%`} />
@@ -21,7 +21,7 @@ const Page = ({ data }) => {
             </Col>
         </Row>
         <Row>
-            <BubbleChart />
+            <BubbleChart header='Fuel split' data={sortedData} />
         </Row>
     </Container>)
 }
