@@ -8,7 +8,6 @@ const hasText = (component, selector, text) => expect(component.find(selector).a
 describe('Card', () => {
     it('Should render header, energyType and value', () => {
         const comp = mount(<Card header='Foo' energyType='Bar' value='Baz' />);
-        console.log(comp.html());
         hasText(comp, '.card-header', 'Foo');
         hasText(comp, '.card-title', 'Bar');
         hasText(comp, '.card-text', 'Baz');

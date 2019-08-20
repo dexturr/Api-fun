@@ -1,22 +1,23 @@
 import React from 'react';
-import { Container, Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import Card from '../card/card';
+import _ from 'lodash';
 
-const OverviewCard = ({header, energyType, value}) => (
-    <Card bg="success" text="white" style={{ width: '18rem' }}>
-        <Card.Header>{header}</Card.Header>
-        <Card.Body>
-        <Card.Title>{energyType}</Card.Title>
-        <Card.Text>
-            <span>{value}</span>
-        </Card.Text>
-        </Card.Body>
-    </Card>
-)
+const Page = ({ data }) => {
+    const sortedData = _.orderBy(data.generationmix, 'perc');
+    const lowest = _.first(sortedData);
+    const highest = _.last(sortedData);
 
-const Page = (props) => {
     return (<Container>
         <h1>Energy Generation Data</h1>
-        <OverviewCard header='Test' energyType='TEST' value='123' />
+        <Row>
+            <Col xs={6}>
+                <Card header='Highest' type='success' energyType={highest.fuel} value={`${highest.perc}%`} />
+            </Col>
+            <Col xs={6}>
+                <Card header='Lowest' type='danger' energyType={lowest.fuel} value={`${lowest.perc}%`} />
+            </Col>
+        </Row>
     </Container>)
 }
 
