@@ -1,7 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from '../card/card';
+import BubbleChart from '../bubble-chart/bubble-chart'
 import _ from 'lodash';
+
 
 const Page = ({ data }) => {
     const sortedData = _.orderBy(data.generationmix, 'perc');
@@ -17,6 +19,9 @@ const Page = ({ data }) => {
             <Col xs={6}>
                 <Card header='Lowest' type='danger' energyType={lowest.fuel} value={`${lowest.perc}%`} />
             </Col>
+        </Row>
+        <Row>
+            <BubbleChart />
         </Row>
     </Container>)
 }
