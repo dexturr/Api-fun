@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import withLoading from './components/loading/with-loading';
-
-const Page = () => {
-    return <h1>UK Energy Mix</h1>;
-}
+import Page from './components/page/page';
 
 const WrappedPage = withLoading(Page);
 
+// TODO need to test but need a fetch mock.
 const App = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState();
