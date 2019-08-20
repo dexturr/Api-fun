@@ -12,7 +12,7 @@ const App = () => {
         const fetchGenData = async () => {
             const response = await fetch('https://api.carbonintensity.org.uk/generation');
             if (response.status === 200) {
-                const data = await response.json();
+                const { data } = await response.json();
                 setData(data);
                 setLoading(false);
             } else {
@@ -20,7 +20,7 @@ const App = () => {
             }
         }
         fetchGenData();
-    })
+    }, [])
     return <WrappedPage loading={loading} data={data} />
 };
 
